@@ -1,23 +1,6 @@
-/**
- * @fileoverview Modelo de Producto del inventario
- * @module models/Product
- */
-
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 
-/**
- * Modelo de Producto
- * @typedef {Object} Product
- * @property {number} id - ID único del producto
- * @property {string} numeroLote - Número de lote del producto
- * @property {string} nombre - Nombre del producto
- * @property {number} precio - Precio unitario del producto
- * @property {number} cantidadDisponible - Cantidad disponible en inventario
- * @property {Date} fechaIngreso - Fecha de ingreso al inventario
- * @property {Date} createdAt - Fecha de creación del registro
- * @property {Date} updatedAt - Fecha de actualización del registro
- */
 const Product = sequelize.define('Product', {
   id: {
     type: DataTypes.INTEGER,
