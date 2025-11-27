@@ -1,16 +1,8 @@
-/**
- * @fileoverview Script para crear datos de prueba inicial
- * @description Ejecutar con: node src/utils/seedData.js
- */
-
 require('dotenv').config();
 const { sequelize, testConnection } = require('../config/database');
 const { User, Product } = require('../models');
 const logger = require('./logger');
 
-/**
- * Datos de usuarios de prueba
- */
 const usuarios = [
   {
     nombre: 'Administrador Principal',
@@ -32,9 +24,6 @@ const usuarios = [
   }
 ];
 
-/**
- * Datos de productos de prueba
- */
 const productos = [
   {
     numeroLote: 'LOT-2025-001',
@@ -108,12 +97,8 @@ const productos = [
   }
 ];
 
-/**
- * Función principal para insertar datos
- */
 const seedData = async () => {
   try {
-    // Conectar a la base de datos
     const connected = await testConnection();
     
     if (!connected) {
@@ -121,18 +106,15 @@ const seedData = async () => {
       process.exit(1);
     }
 
-    // Sincronizar modelos (crea las tablas si no existen)
-    await sequelize.sync({ force: true }); // CUIDADO: force:true elimina todas las tablas
+    await sequelize.sync({ force: true });
     logger.info('✓ Base de datos sincronizada');
 
-    // Crear usuarios
     logger.info('Creando usuarios de prueba...');
     for (const userData of usuarios) {
       await User.create(userData);
       logger.info(`  ✓ Usuario creado: ${userData.email} (${userData.rol})`);
     }
 
-    // Crear productos
     logger.info('\nCreando productos de prueba...');
     for (const productData of productos) {
       await Product.create(productData);
@@ -157,5 +139,4 @@ const seedData = async () => {
   }
 };
 
-// Ejecutar script
 seedData();

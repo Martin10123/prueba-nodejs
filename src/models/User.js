@@ -1,22 +1,7 @@
-/**
- * @fileoverview Modelo de Usuario con roles Admin y Cliente
- * @module models/User
- */
-
 const { DataTypes } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const { sequelize } = require('../config/database');
 
-/**
- * Modelo de Usuario con propiedades:
- * - id: ID único del usuario
- * - nombre: Nombre completo del usuario
- * - email: Email único del usuario
- * - password: Contraseña encriptada
- * - rol: Rol del usuario (admin o cliente)
- * - createdAt: Fecha de creación
- * - updatedAt: Fecha de actualización
- */
 const User = sequelize.define('User', {
   id: {
     type: DataTypes.INTEGER,
@@ -79,18 +64,12 @@ const User = sequelize.define('User', {
   tableName: 'users',
   timestamps: true,
   hooks: {
-    /**
-     * Hook para encriptar contraseña antes de crear usuario
-     */
     beforeCreate: async (user) => {
       if (user.password) {
         const rounds = parseInt(process.env.BCRYPT_ROUNDS) || 10;
         user.password = await bcrypt.hash(user.password, rounds);
       }
     },
-    /**
-     * Hook para encriptar contraseña antes de actualizar usuario
-     */
     beforeUpdate: async (user) => {
       if (user.changed('password')) {
         const rounds = parseInt(process.env.BCRYPT_ROUNDS) || 10;
@@ -100,18 +79,10 @@ const User = sequelize.define('User', {
   }
 });
 
-/**
- * Método de instancia para comparar contraseñas
- * @param {string} password - Contraseña en texto plano
- * @returns {Promise<boolean>} true si la contraseña coincide
- */
 User.prototype.comparePassword = async function(password) {
   return await bcrypt.compare(password, this.password);
 };
 
-/**
- * Excluir password de las respuestas JSON
- */
 User.prototype.toJSON = function() {
   const values = { ...this.get() };
   delete values.password;

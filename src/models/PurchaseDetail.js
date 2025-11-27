@@ -1,23 +1,6 @@
-/**
- * @fileoverview Modelo de Detalle de Compra (productos incluidos en cada compra)
- * @module models/PurchaseDetail
- */
-
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 
-/**
- * Modelo de Detalle de Compra
- * @typedef {Object} PurchaseDetail
- * @property {number} id - ID único del detalle
- * @property {number} purchaseId - ID de la compra
- * @property {number} productId - ID del producto
- * @property {number} cantidad - Cantidad de productos comprados
- * @property {number} precioUnitario - Precio unitario al momento de la compra
- * @property {number} subtotal - Subtotal (cantidad * precioUnitario)
- * @property {Date} createdAt - Fecha de creación del registro
- * @property {Date} updatedAt - Fecha de actualización del registro
- */
 const PurchaseDetail = sequelize.define('PurchaseDetail', {
   id: {
     type: DataTypes.INTEGER,

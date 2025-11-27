@@ -1,16 +1,7 @@
-/**
- * @fileoverview Configuración de conexión a la base de datos con Sequelize
- * @module config/database
- */
-
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 const logger = require('../utils/logger');
 
-/**
- * Instancia de Sequelize para la conexión a PostgreSQL
- * @type {Sequelize}
- */
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -29,12 +20,6 @@ const sequelize = new Sequelize(
   }
 );
 
-/**
- * Prueba la conexión a la base de datos
- * @async
- * @function testConnection
- * @returns {Promise<boolean>} true si la conexión es exitosa
- */
 const testConnection = async () => {
   try {
     await sequelize.authenticate();

@@ -1,16 +1,5 @@
-/**
- * @fileoverview Validaciones con express-validator para rutas de autenticación
- * @module middlewares/validators
- */
-
 const { body, validationResult } = require('express-validator');
 
-/**
- * Middleware para manejar resultados de validación
- * @param {Object} req - Request de Express
- * @param {Object} res - Response de Express
- * @param {Function} next - Siguiente middleware
- */
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   
@@ -28,9 +17,6 @@ const handleValidationErrors = (req, res, next) => {
   next();
 };
 
-/**
- * Validaciones para registro de usuario
- */
 const validateRegister = [
   body('nombre')
     .trim()
@@ -54,9 +40,6 @@ const validateRegister = [
   handleValidationErrors
 ];
 
-/**
- * Validaciones para login de usuario
- */
 const validateLogin = [
   body('email')
     .trim()
@@ -70,9 +53,6 @@ const validateLogin = [
   handleValidationErrors
 ];
 
-/**
- * Validaciones para crear/actualizar producto
- */
 const validateProduct = [
   body('numeroLote')
     .trim()
@@ -98,9 +78,6 @@ const validateProduct = [
   handleValidationErrors
 ];
 
-/**
- * Validaciones para realizar compra
- */
 const validatePurchase = [
   body('productos')
     .isArray({ min: 1 }).withMessage('Debe incluir al menos un producto'),
