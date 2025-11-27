@@ -1,21 +1,6 @@
-/**
- * @fileoverview Modelo de Compra realizada por un cliente
- * @module models/Purchase
- */
-
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 
-/**
- * Modelo de Compra
- * @typedef {Object} Purchase
- * @property {number} id - ID único de la compra
- * @property {number} userId - ID del usuario que realiza la compra
- * @property {Date} fechaCompra - Fecha y hora de la compra
- * @property {number} total - Monto total de la compra
- * @property {Date} createdAt - Fecha de creación del registro
- * @property {Date} updatedAt - Fecha de actualización del registro
- */
 const Purchase = sequelize.define('Purchase', {
   id: {
     type: DataTypes.INTEGER,
